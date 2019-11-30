@@ -17,6 +17,7 @@ int visited[MAXVEX];//用于标记结点是否访问，为1则表示已经访问，为0则表示未访问
 //int EnQueue(Queue *Q, int e) {
 //
 //}
+//scanf("%[^\n]%*c", &(G->vexs[i]));	
 
 typedef struct  {
 	char vexs[MAXVEX];//存储顶点的信息的一维数组
@@ -31,7 +32,10 @@ void creatGraph(Graph *G) {
 	getchar();
 	for (i = 0; i < G->numVertexs;i++) {//顶点数
 		printf("请输入顶点信息：");
-		scanf("%[^\n]%*c" ,&(G->vexs[i]));
+		scanf("%[^\n]%*c", &(G->vexs[i]));
+		
+	
+
 	}
 	for (i = 0; i < G->numVertexs; i++) {//初始化为0
 		for (j = 0; j < G->numVertexs;j++) {
