@@ -27,7 +27,7 @@ Node *buyNode(int val) {
 }
 
 
-void Test() {
+ void Test() {
 	Node *a = buyNode(1);
 	Node *b = buyNode(2);
 	Node *c= buyNode(3);
@@ -47,71 +47,71 @@ void Test() {
 
 }
 
-//是否对称
-int  isMirror(Node *p,Node *q ){
-	if (p==NULL&&q==NULL) {
-		return 1;
-	}
-	if (p==NULL||q==NULL) {
-		return 0;
-	}
-	//递推
-	return p->val == q->val&&isMirror(p->left, q->right) && isMirror(p->right, q->left);
-}
-int isSymmetric(Node *root) {
-	if (root==NULL) {
-		return 1;
-	}
-	return  isMirror(root->left, root->right);
-}
-//是否相等
-int isSameTree(Node *p,Node *q) {
-	if (p == NULL && q == NULL) {
-		return 1;
-	}
-	if (p == NULL || q == NULL) {
-		return 0;
-	}
-	return p->val == q->val&& isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
-
-}
-//另一个数的子树
-//前序遍历
-//数的相等
-//返回值的处理
-int isSameTree(Node *p, Node *q) {
-	if (p == NULL && q == NULL) {
-		return 1;
-	}
-	if (p == NULL || q == NULL) {
-		return 0;
-	}
-	return p->val == q->val&& isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
-
-}
-int preorderTraversal(Node *root, Node *t) {
-	if (root==NULL) {
-		return ;
-	}
-	//根
-	int root_ret;
-	if (root->val==t->val&&isSameTree(root,t)) {
-		return 1;
-	}
-	//左子树
-	int left = preorderTraversal(root->left, t);
-	if (left==1){
-		return 1;
-	}
-	//柚子树
-	int right=preorderTraversal(root->left,t);
-		return 1;
-	
-}
-int isSubtree(Node *s,Node *t) {
-	if (t==NULL) {
-		return 1;
-	}
-	return  preorderTraversal(s,t);
-
-}
+////是否对称
+//int  isMirror(Node *p,Node *q ){
+//	if (p==NULL&&q==NULL) {
+//		return 1;
+//	}
+//	if (p==NULL||q==NULL) {
+//		return 0;
+//	}
+//	//递推
+//	return p->val == q->val&&isMirror(p->left, q->right) && isMirror(p->right, q->left);
+//}
+//int isSymmetric(Node *root) {
+//	if (root==NULL) {
+//		return 1;
+//	}
+//	return  isMirror(root->left, root->right);
+//}
+////是否相等
+//int isSameTree(Node *p,Node *q) {
+//	if (p == NULL && q == NULL) {
+//		return 1;
+//	}
+//	if (p == NULL || q == NULL) {
+//		return 0;
+//	}
+//	return p->val == q->val&& isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+//
+//}
+////另一个数的子树
+////前序遍历
+////数的相等
+////返回值的处理
+//int isSameTree(Node *p, Node *q) {
+//	if (p == NULL && q == NULL) {
+//		return 1;
+//	}
+//	if (p == NULL || q == NULL) {
+//		return 0;
+//	}
+//	return p->val == q->val&& isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+//
+//}
+//int preorderTraversal(Node *root, Node *t) {
+//	if (root==NULL) {
+//		return ;
+//	}
+//	//根
+//	int root_ret;
+//	if (root->val==t->val&&isSameTree(root,t)) {
+//		return 1;
+//	}
+//	//左子树
+//	int left = preorderTraversal(root->left, t);
+//	if (left==1){
+//		return 1;
+//	}
+//	//柚子树
+//	int right=preorderTraversal(root->left,t);
+//		return 1;
+//	
+//}
+//int isSubtree(Node *s,Node *t) {
+//	if (t==NULL) {
+//		return 1;
+//	}
+//	return  preorderTraversal(s,t);
+//
+//}
