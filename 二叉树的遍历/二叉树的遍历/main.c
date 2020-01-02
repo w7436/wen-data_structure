@@ -40,7 +40,7 @@ void PreOrder_1(Node *root) {
 		//出栈
 	
 		//栈为空
-		if (top<0) {
+		if (top<=0) {
 			return;
 		}
 		else {
@@ -49,8 +49,6 @@ void PreOrder_1(Node *root) {
 			tmp = tmp->right;
 		}
 	}
-	
-
 }
 //中序遍历二叉树(递归)
 void InOrder(Node *root) {
@@ -61,6 +59,35 @@ void InOrder(Node *root) {
 	printf("%d", root->data);
 	InOrder(root->right);
 }
+void InOreder_1(Node *root) {
+	while (root==NULL) {
+		return;
+	}
+	Node* stack[SIZE];
+	Node* tmp = root;
+	int top = 0;//代表栈顶
+	while (tmp!=NULL||top!=0){
+		while (tmp != NULL) {
+			if (top<SIZE) {
+				stack[top] = tmp;
+				tmp = tmp->left;
+				top++;
+			}
+			else {
+				return;
+			}
+		}
+		if (top<=0) {
+			return;
+		}else{
+			top--;
+			tmp = stack[top];
+			printf("%d", tmp->data);
+			tmp = tmp->right;
+		}
+
+	}
+}
 //后序遍二叉树(递归)
 void PostOrder(Node *root) {
 	if (root == NULL) {
@@ -69,6 +96,60 @@ void PostOrder(Node *root) {
 	PostOrder(root->left);
 	printf("%c ", root->data);
 	PostOrder(root->right);
+}
+//后序遍历二叉树（非递归），相对于前序和中序较为复杂
+void PostOrder_1(Node *root) {
+	if (root==NULL) {
+		return;
+	}
+	Node *stack[SIZE];
+	Node *tmp = root;
+	int top = 0;
+	Node*re = NULL;
+	while (tmp!=NULL||top!=0) {
+		while (tmp!=NULL) {
+			if (top<SIZE) {
+				stack[top] = tmp;
+				tmp = tmp->left;
+				top++;
+			}else {
+				return;
+			}
+		}
+		top--;
+		tmp = stack[top];
+		if (tmp->right&&tmp->right!=re) {
+			tmp = tmp->right;
+			top++;//将其入栈
+		}
+		else {
+			printf("%d", tmp->data);
+			re = tmp;
+			tmp = NULL;
+		}
+	}
+}
+//二叉树的层次遍历（采用队列结构）
+void LevelOrder(Node* root) {
+	if (root==NULL) {
+		return NULL;
+	}
+	Node* queue[SIZE];
+	int front=-1, rear=0;//rear代表尾，front代表头
+	queue[rear] = root;
+	while (front!=rear) {
+		front++;
+		printf("%d", queue[front]->data);
+		if (queue[front]->left!=NULL) {
+			rear++;
+			queue[rear] = queue[front]->left;
+		}
+		if (queue[front]->right!=NULL) {
+			rear++;
+			queue[rear] = queue[front]->right;
+		}
+	}
+
 }
 
 Node* buyNode(int data) {
@@ -85,16 +166,19 @@ void Test() {
 	Node *e = buyNode(5);
 	Node *f = buyNode(6);
 	Node *g = buyNode(7);
+
 	a->left = b;
 	a->right = c;
-	c->left = d;
-	c->right = f;
-	d->right = e;
-	f->right = g;
+	b->left = d;
+	b->right = e;
+	c->left = f;
+	c->right = g;
 
 	//PreOrder(a);
-	PreOrder_1(a);
-
+	//PreOrder_1(a);
+//	InOreder_1(a);
+	//PostOrder_1(a);
+	LevelOrder(a);
 }
 
 int main() {
