@@ -259,6 +259,65 @@ public class TestDemo {
             gap*=2;
         }
     }
+
+    /**
+     *
+     * @param /稳定
+     *
+     */
+    public static void bubbleSort(int[] arr){
+  //到达一定程度，不需要冒泡
+        boolean flg = false;
+        //外层循环控制趟数
+        for(int i = 0;i < arr.length-1;i++){
+            //具体冒泡的方式
+            for (int j = 1; j < arr.length-i; j++) {
+                if(arr[j-1] > arr[j]){
+                    swap(arr,j-1,j);
+                    flg = true;
+                }
+            }
+            if(!flg){
+                return;
+            }
+
+        }
+    }
+
+    //数据密集集中在某个范围（稳定）
+    //时间复杂度O(n)
+    //O(m)区间的个数
+    public static void countSort(int[] arr){
+        //统计元素的范围
+        int min =arr[0];
+        int max = arr[0];
+        for (int i = 0; i < arr.length ; i++) {
+            if(arr[i] > max ){
+                max = arr[i];
+            }
+            if(arr[i] < min){
+                min = arr[i];
+            }
+        }
+
+        int range = max - min +1;
+        int[] arrCount = new int[range];
+
+        int index = 0;
+        for (int i = 0; i < arr.length; i++) {
+            arrCount[arr[i]-min]++;
+        }
+
+        //进行回收，排序
+        for(int i = 0;i < range;i++){
+            if(arrCount[i]--!=0){
+                arr[index++]= i + min;
+
+            }
+        }
+
+
+    }
     public static void swap(int[] arr,int l,int r){
         int tmp = arr[l];
         arr[l] =arr[r];
