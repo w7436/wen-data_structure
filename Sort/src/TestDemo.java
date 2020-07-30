@@ -73,6 +73,7 @@ public class TestDemo {
             if(maxPos!=end){
                 swap(nums,maxPos,end);
             }
+            //倘若最后一个位置就是最小值，则进行交换
             if(minPos == end){
                 minPos = maxPos;
             }
@@ -104,7 +105,7 @@ public class TestDemo {
 //向下调整
     private static void shifDown(int[] array, int parent,int size) {
         int child = parent*2+1;
-        while(child <size){
+        while(child < size){
             //找左右孩子中较大的孩子
             if(child+1 < size && array[child+1] > array[child])
                 child+=1;
@@ -146,10 +147,10 @@ public class TestDemo {
     private static int partion(int[] array, int left, int right) {
 
         int begin = 0;
-        int end = right -1;
+        int end = right - 1;
         int key = array[end];
         while(begin < end){
-            while(begin < end &&array [begin] <= key){
+            while(begin < end && array [begin] <= key){
                 begin++;
             }
             while(begin < end && array[end] >= key){
@@ -162,8 +163,6 @@ public class TestDemo {
         if(begin != right -1)
             swap(array,begin,right-1);
         return begin;
-
-
     }
     //挖坑法
     private static int partion1(int[] array, int left, int right) {
@@ -172,14 +171,14 @@ public class TestDemo {
         int key = array[end];
         while(begin < end){
             //
-            while (begin < end &&array[begin] <= key){
+            while (begin < end && array[begin] <= key){
                 begin++;
             }
             //找到一个比基准值大的元素
             if(begin  < end){
                 array[end--] = array[begin];
             }
-            while(begin < end&&array[end] >= key){
+            while(begin < end&& array[end] >= key){
                 end--;
             }
             //找到一个比基准值小的元素
@@ -187,7 +186,7 @@ public class TestDemo {
                 array[begin--]=array[end];
             }
         }
-        array[begin] =key;
+        array[begin] = key;
         return begin;
     }
 
@@ -200,6 +199,10 @@ public class TestDemo {
             int right = a.pop();
             if(right - left  > 1){
                 int div = partion(array,left,right);
+                a.push(right);
+                a.push(div+1);
+                a.push(div);
+                a.push(left);
 
             }
         }
@@ -216,11 +219,11 @@ public class TestDemo {
                 tmp[index++] = array[begin1++];
             }
             else{
-                tmp[index++] = array[begin2];
+                tmp[index++] = array[begin2++];
             }
         }
         while(begin1 < end1){
-            tmp[index ++] = array[begin1++];
+            tmp[index++] = array[begin1++];
         }
         while(begin2 < end2){
             tmp[index++] = array[begin2++];
@@ -329,13 +332,13 @@ public class TestDemo {
         }
     }
     public static void main(String[] args) {
-        int[] nums = {2,5,1,5,3,7,9};
+        int[] nums = {9,3,8,2,6,5,7,1,4,0};
 //        insertSort(nums);
 //        shellSort(nums);
 //        selectSort(nums);
-//        selectSortOP(nums);
+        selectSortOP(nums);
 //        HeapSort(nums);
-        quickSort(nums,0,7);
+//        quickSort(nums,0,7);
         printArray(nums);
 
     }
